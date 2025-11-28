@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // Aquí iría tu lógica de autenticación real
     // Por ahora, simulamos un login
 
-    const res = await fetch('http://localhost:4000/api/auth/login', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
       credentials: 'include',
       method: 'POST',
       body: JSON.stringify({
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = async () => {
     try {
-      const res = await fetch('http://localhost:4000/api/auth/logout', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {
         credentials: 'include',
         method: 'POST'
       })
