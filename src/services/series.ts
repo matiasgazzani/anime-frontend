@@ -1,7 +1,7 @@
-const BASE_URL = 'http://localhost:4000/api/'
+const BASE_URL = import.meta.env.VITE_API_URL
 
 export async function getSeries() {
-  const res = await fetch(`${BASE_URL}series`, {
+  const res = await fetch(`${BASE_URL}/api/series`, {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ export async function getSeries() {
 }
 
 export async function getSerieById(id: string) {
-  const res = await fetch(`http://localhost:4000/api/series/${id}`, {
+  const res = await fetch(`${BASE_URL}/api/series/${id}`, {
     credentials: 'include',
     headers: {
       Authorization: `Bearer ${localStorage.getItem('auth_token')}`

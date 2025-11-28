@@ -1,5 +1,5 @@
 export async function getNexos() {
-    const res = await fetch('http://localhost:4000/api/nexos', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/nexos`, {
         credentials: 'include',
         headers: {
             Authorization: `Bearer ${localStorage.getItem('auth_token')}`
@@ -10,7 +10,7 @@ export async function getNexos() {
 }
 
 export async function createNexo(nexoData: Omit<Nexo, 'id' | 'created_at' | 'updated_at'>) {
-    const res = await fetch('http://localhost:4000/api/nexos', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/nexos`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -30,7 +30,7 @@ export async function createNexo(nexoData: Omit<Nexo, 'id' | 'created_at' | 'upd
 }
 
 export async function updateNexo(id: number, nexoData: Partial<Nexo>) {
-    const res = await fetch(`http://localhost:4000/api/nexos/${id}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/nexos/${id}`, {
         method: 'PUT',
         credentials: 'include',
         headers: {
