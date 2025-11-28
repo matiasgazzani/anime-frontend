@@ -56,7 +56,7 @@ export default function Card ({ data }: Props) {
               data.img2
                 ? data.img2.includes('http')
                   ? data.img2
-                  : `http://localhost:4000/Portadas/${data.img2}`
+                  : `${import.meta.env.VITE_API_URL}/api/Portadas/${data.img2}`
                 : data.img
             }
             alt={data.name}

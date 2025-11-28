@@ -174,7 +174,7 @@ const SeriePage = () => {
   const imageUrl = serie.img2
     ? serie.img2.includes('http')
       ? serie.img2
-      : `http://localhost:4000/Portadas/${serie.img2}`
+      : `${import.meta.env.VITE_API_URL}/api/Portadas/${serie.img2}`
     : serie.img
 
   const genres = [serie.genre, serie.genre2, serie.genre3].filter(Boolean)
