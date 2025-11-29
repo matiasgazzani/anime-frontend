@@ -4,6 +4,7 @@ import { getNexos, type Nexo } from '../services/nexos'
 import { getSeries, type FSerie, type Serie } from '../services/series'
 import Card from '../components/Card'
 import Pager from '../components/Pagination'
+import ThemeToggle from '../components/ThemeToggle'
 import './Styles/Series.css'
 function Series () {
   const navigate = useNavigate()
@@ -98,21 +99,24 @@ function Series () {
   }, [series, nexos, searchSerie, userID])
 
   return (
-    <main className='min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900'>
+    <main className='min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-50 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900 transition-colors duration-300'>
+      {/* Theme Toggle Button */}
+      <ThemeToggle />
+      
       {/* Header Section */}
       <div className='relative overflow-hidden'>
         {/* Animated Background Blobs */}
         <div className='absolute inset-0 overflow-hidden pointer-events-none'>
-          <div className='absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob' />
-          <div className='absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob animation-delay-2000' />
+          <div className='absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 dark:opacity-20 animate-blob' />
+          <div className='absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 dark:opacity-20 animate-blob animation-delay-2000' />
         </div>
 
         <div className='relative z-10 pt-20 pb-12 px-6'>
           <div className='max-w-7xl mx-auto text-center'>
-            <h1 className='text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent'>
+            <h1 className='text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 dark:from-purple-400 dark:via-pink-400 dark:to-blue-400 bg-clip-text text-transparent'>
               Anime Database
             </h1>
-            <p className='text-gray-400 text-lg mb-8'>
+            <p className='text-gray-600 dark:text-gray-400 text-lg mb-8'>
               Explore your personal anime database • {(filteredData.length > 0) || 0} series
             </p>
 
@@ -120,13 +124,13 @@ function Series () {
             <div className='max-w-2xl mx-auto'>
               <div className='relative group'>
                 <div className='absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none'>
-                  <span className='text-gray-400 text-xl'>🔍</span>
+                  <span className='text-gray-500 dark:text-gray-400 text-xl'>🔍</span>
                 </div>
                 <input
                   type='text'
                   name='Search'
                   id='Search'
-                  className='w-full pl-12 pr-4 py-4 bg-gray-800/50 backdrop-blur-sm border-2 border-gray-700/50 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300'
+                  className='w-full pl-12 pr-4 py-4 bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm border-2 border-gray-200 dark:border-gray-700/50 rounded-2xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:outline-none focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300'
                   placeholder='Search anime... (e.g., Shingeki no Kyojin)'
                   onChange={(e) => {
                     setSearchSerie(e.target.value)
@@ -137,7 +141,7 @@ function Series () {
                 {searchSerie && (
                   <button
                     onClick={() => setSearchSerie('')}
-                    className='absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-white transition-colors'
+                    className='absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors'
                   >
                     ✕
                   </button>
@@ -156,13 +160,13 @@ function Series () {
               <div className='absolute inset-0 border-4 border-purple-500/30 rounded-full' />
               <div className='absolute inset-0 border-4 border-transparent border-t-purple-500 rounded-full animate-spin' />
             </div>
-            <p className='text-gray-400 text-lg'>Loading your anime collection...</p>
+            <p className='text-gray-600 dark:text-gray-400 text-lg'>Loading your anime collection...</p>
           </div>
         ) : filteredData.length === 0 ? (
           <div className='text-center py-20'>
             <div className='text-6xl mb-4'>📺</div>
-            <h3 className='text-2xl font-semibold text-white mb-2'>No anime found</h3>
-            <p className='text-gray-400'>
+            <h3 className='text-2xl font-semibold text-gray-900 dark:text-white mb-2'>No anime found</h3>
+            <p className='text-gray-600 dark:text-gray-400'>
               {searchSerie
                 ? `No results for "${searchSerie}". Try a different search.`
                 : 'Your collection is empty. Start adding some anime!'}
@@ -191,7 +195,7 @@ function Series () {
       {/* Floating Action Button */}
       <button
         onClick={async () => await navigate('/series/add')}
-        className='fixed bottom-8 right-8 w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full shadow-2xl shadow-purple-500/50 hover:shadow-purple-500/75 hover:scale-110 transition-all duration-300 flex items-center justify-center group z-50'
+        className='fixed bottom-8 right-6 w-14 h-14 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full shadow-2xl shadow-purple-500/50 hover:shadow-purple-500/75 transition-all duration-300 flex items-center justify-center group z-50'
         title='Añadir nueva serie'
       >
         <span className='text-white text-3xl font-bold group-hover:rotate-90 transition-transform duration-300'>

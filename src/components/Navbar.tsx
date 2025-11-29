@@ -76,13 +76,13 @@ export const Navbar = () => {
                   className='flex items-center space-x-3 focus:outline-none group'
                 >
                   <span className='hidden md:block text-sm font-medium text-gray-300 group-hover:text-white transition-colors'>
-                    {user.name}
+                    {localStorage.getItem('name')}
                   </span>
                   <div className='relative'>
                     <img
                       className='h-9 w-9 rounded-full border-2 border-purple-500/30 group-hover:border-purple-500 transition-all object-cover'
-                      src={user.profile_img || `https://ui-avatars.com/api/?name=${user.name}&background=random`}
-                      alt={user.name}
+                      src={`https://ui-avatars.com/api/?name=${localStorage.getItem('name')}&background=random`}
+                      alt={localStorage.getItem('name') || 'Usuario Demo'}
                     />
                     <div className={`absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-gray-900 ${isMenuOpen ? 'bg-green-500' : 'bg-gray-500'}`} />
                   </div>
@@ -92,8 +92,8 @@ export const Navbar = () => {
                 {isMenuOpen && (
                   <div className='absolute right-0 mt-2 w-48 rounded-xl bg-gray-800 border border-gray-700 shadow-lg py-1 ring-1 ring-black ring-opacity-5 focus:outline-none transform transition-all duration-200 origin-top-right'>
                     <div className='px-4 py-3 border-b border-gray-700/50'>
-                      <p className='text-sm text-white font-medium truncate'>{user.name}</p>
-                      <p className='text-xs text-gray-400 truncate'>{user.email}</p>
+                      <p className='text-sm text-white font-medium truncate'>{localStorage.getItem('name')}</p>
+                      <p className='text-xs text-gray-400 truncate'>{localStorage.getItem('email')}</p>
                     </div>
 
                     <Link

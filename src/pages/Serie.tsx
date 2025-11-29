@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Modal from '../components/Modal'
 import VideoModal from '../components/VideoModal'
+import ThemeToggle from '../components/ThemeToggle'
 import { getSerieById, getSerieByName, type FSerie } from '../services/series'
 import { getNexos, type Nexo } from '../services/nexos'
 
@@ -125,13 +126,14 @@ const SeriePage = () => {
   // Mientras carga
   if (loading) {
     return (
-      <div className='min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center'>
+      <div className='min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-50 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900 flex items-center justify-center'>
+        <ThemeToggle />
         <div className='text-center'>
           <div className='relative w-20 h-20 mb-6 mx-auto'>
             <div className='absolute inset-0 border-4 border-purple-500/30 rounded-full' />
             <div className='absolute inset-0 border-4 border-transparent border-t-purple-500 rounded-full animate-spin' />
           </div>
-          <p className='text-gray-400 text-lg'>Cargando información del anime...</p>
+          <p className='text-gray-600 dark:text-gray-400 text-lg'>Cargando información del anime...</p>
         </div>
       </div>
     )
@@ -140,11 +142,12 @@ const SeriePage = () => {
   // Si hay error o no hay datos
   if (error || (serie == null)) {
     return (
-      <div className='min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center'>
+      <div className='min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-50 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900 flex items-center justify-center'>
+        <ThemeToggle />
         <div className='text-center'>
           <div className='text-6xl mb-4'>😞</div>
-          <h2 className='text-2xl font-semibold text-white mb-2'>Anime no encontrado</h2>
-          <p className='text-gray-400 mb-6'>{error ?? 'No se encontró la serie.'}</p>
+          <h2 className='text-2xl font-semibold text-gray-900 dark:text-white mb-2'>Anime no encontrado</h2>
+          <p className='text-gray-600 dark:text-gray-400 mb-6'>{error ?? 'No se encontró la serie.'}</p>
           <button
             onClick={async () => await navigate('/series')}
             className='px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl text-white font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105'
@@ -180,11 +183,14 @@ const SeriePage = () => {
   const genres = [serie.genre, serie.genre2, serie.genre3].filter(Boolean)
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900'>
+    <div className='min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-gray-50 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900'>
+      {/* Theme Toggle */}
+      <ThemeToggle />
+      
       {/* Back Button */}
       <button
         onClick={async () => await navigate('/series')}
-        className='fixed top-24 left-6 z-50 p-3 bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-full text-white hover:bg-gray-700/80 hover:border-purple-500/50 transition-all duration-300 hover:scale-110 group'
+        className='fixed top-24 left-6 z-50 p-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 rounded-full text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700/80 hover:border-purple-500/50 transition-all duration-300 hover:scale-110 group'
       >
         <svg
           className='w-6 h-6'
@@ -210,8 +216,8 @@ const SeriePage = () => {
             backgroundImage: `url(${imageUrl})`
           }}
         >
-          <div className='absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent' />
-          <div className='absolute inset-0 bg-gradient-to-r from-gray-900 via-transparent to-gray-900/50' />
+          <div className='absolute inset-0 bg-gradient-to-t from-gray-50 via-gray-50/80 to-transparent dark:from-gray-900 dark:via-gray-900/80 dark:to-transparent' />
+          <div className='absolute inset-0 bg-gradient-to-r from-gray-50 via-transparent to-gray-50/50 dark:from-gray-900 dark:via-transparent dark:to-gray-900/50' />
         </div>
 
         {/* Hero Content */}
@@ -223,7 +229,7 @@ const SeriePage = () => {
                 <img
                   src={imageUrl}
                   alt={serie.name}
-                  className='w-48 md:w-64 rounded-2xl shadow-2xl border-4 border-gray-700/50'
+                  className='w-48 md:w-64 rounded-2xl shadow-2xl border-4 border-gray-200 dark:border-gray-700/50'
                 />
               </div>
 
@@ -288,33 +294,33 @@ const SeriePage = () => {
           {/* Main Info Card */}
           <div className='md:col-span-2 space-y-8'>
             {/* Stats Grid */}
-            <div className='bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6'>
-              <h2 className='text-2xl font-bold text-white mb-6 flex items-center gap-2'>
+            <div className='bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 rounded-2xl p-6'>
+              <h2 className='text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2'>
                 📊 Estadísticas
               </h2>
               <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
-                <div className='bg-gray-900/50 rounded-xl p-4 text-center'>
+                <div className='bg-gray-100 dark:bg-gray-900/50 rounded-xl p-4 text-center'>
                   <div className='text-3xl mb-2'>📺</div>
                   <div className='text-2xl font-bold text-purple-400'>{filteredNexo?.seen || 0}</div>
-                  <div className='text-gray-400 text-sm'>Episodios vistos</div>
+                  <div className='text-gray-600 dark:text-gray-400 text-sm'>Episodios vistos</div>
                 </div>
-                <div className='bg-gray-900/50 rounded-xl p-4 text-center'>
+                <div className='bg-gray-100 dark:bg-gray-900/50 rounded-xl p-4 text-center'>
                   <div className='text-3xl mb-2'>⭐</div>
                   <div className='text-2xl font-bold text-yellow-400'>{filteredNexo?.stars || 'N/A'}/5</div>
-                  <div className='text-gray-400 text-sm'>Calificación</div>
+                  <div className='text-gray-600 dark:text-gray-400 text-sm'>Calificación</div>
                 </div>
-                <div className='bg-gray-900/50 rounded-xl p-4 text-center'>
+                <div className='bg-gray-100 dark:bg-gray-900/50 rounded-xl p-4 text-center'>
                   <div className='text-3xl mb-2'>📅</div>
                   <div className='text-2xl font-bold text-blue-400'>{serie.year}</div>
-                  <div className='text-gray-400 text-sm'>Año</div>
+                  <div className='text-gray-600 dark:text-gray-400 text-sm'>Año</div>
                 </div>
               </div>
             </div>
 
             {/* Genres */}
             {genres.length > 0 && (
-              <div className='bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6'>
-                <h2 className='text-2xl font-bold text-white mb-4 flex items-center gap-2'>
+              <div className='bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 rounded-2xl p-6'>
+                <h2 className='text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2'>
                   🎭 Géneros
                 </h2>
                 <div className='flex flex-wrap gap-3'>
@@ -333,30 +339,30 @@ const SeriePage = () => {
 
           {/* Sidebar Info */}
           <div className='space-y-6'>
-            <div className='bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6'>
-              <h2 className='text-xl font-bold text-white mb-4'>Información</h2>
+            <div className='bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 rounded-2xl p-6'>
+              <h2 className='text-xl font-bold text-gray-900 dark:text-white mb-4'>Información</h2>
               <div className='space-y-3 text-sm'>
                 {serie.studio && (
                   <div>
-                    <div className='text-gray-400 mb-1'>Estudio</div>
-                    <div className='text-white font-semibold'>{serie.studio}</div>
+                    <div className='text-gray-600 dark:text-gray-400 mb-1'>Estudio</div>
+                    <div className='text-gray-900 dark:text-white font-semibold'>{serie.studio}</div>
                   </div>
                 )}
                 <div>
-                  <div className='text-gray-400 mb-1'>Estado</div>
-                  <div className='text-white font-semibold flex items-center gap-2'>
+                  <div className='text-gray-600 dark:text-gray-400 mb-1'>Estado</div>
+                  <div className='text-gray-900 dark:text-white font-semibold flex items-center gap-2'>
                     <span className={`w-2 h-2 ${stateInfo.color} rounded-full`} />
                     {stateInfo.text}
                   </div>
                 </div>
                 <div>
-                  <div className='text-gray-400 mb-1'>Temporada</div>
-                  <div className='text-white font-semibold'>{serie.season} {serie.year}</div>
+                  <div className='text-gray-600 dark:text-gray-400 mb-1'>Temporada</div>
+                  <div className='text-gray-900 dark:text-white font-semibold'>{serie.season} {serie.year}</div>
                 </div>
                 {(filteredNexo != null) && (
                   <div>
-                    <div className='text-gray-400 mb-1'>Progreso</div>
-                    <div className='text-white font-semibold'>{filteredNexo.seen} episodios vistos</div>
+                    <div className='text-gray-600 dark:text-gray-400 mb-1'>Progreso</div>
+                    <div className='text-gray-900 dark:text-white font-semibold'>{filteredNexo.seen} episodios vistos</div>
                   </div>
                 )}
               </div>
@@ -364,7 +370,7 @@ const SeriePage = () => {
 
             {/* Quick Actions */}
             <div className='bg-gradient-to-br from-purple-600/20 to-pink-600/20 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6'>
-              <h3 className='text-lg font-bold text-white mb-4'>Acciones rápidas</h3>
+              <h3 className='text-lg font-bold text-gray-900 dark:text-white mb-4'>Acciones rápidas</h3>
               <div className='space-y-3'>
                 <button
                   onClick={async () => await navigate(`/series/edit/${id}`)}

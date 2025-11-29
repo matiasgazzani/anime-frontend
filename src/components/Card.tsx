@@ -47,7 +47,7 @@ export default function Card ({ data }: Props) {
     <div className='group'>
       <div
         onClick={() => handleClick(data.id)}
-        className='relative overflow-hidden rounded-2xl bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20'
+        className='relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20'
       >
         {/* Image Container */}
         <div className='relative aspect-[2/3] overflow-hidden'>
