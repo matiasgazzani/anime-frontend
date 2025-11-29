@@ -1,0 +1,30 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main  # o la rama que uses para producción
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo (no es estrictamente necesario, pero queda)
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ${{ secrets.PROJECT_PATH }}/anime-api
+            git pull
+
+            cd ${{ secrets.PROJECT_PATH }}/anime-frontend
+            git pull
+
+            cd ${{ secrets.PROJECT_PATH }}
+            docker compose up -d --build
