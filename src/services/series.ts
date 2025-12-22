@@ -24,7 +24,7 @@ export async function getSerieById(id: string) {
 }
 
 export async function createSerie(serieData: Omit<Serie, 'id' | 'status' | 'created_at' | 'updated_at'>) {
-  const res = await fetch(`${BASE_URL}series`, {
+  const res = await fetch(`${BASE_URL}/api/series`, {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -44,7 +44,7 @@ export async function createSerie(serieData: Omit<Serie, 'id' | 'status' | 'crea
 }
 
 export async function updateSerie(id: number, serieData: Partial<Serie>) {
-  const res = await fetch(`${BASE_URL}series/${id}`, {
+  const res = await fetch(`${BASE_URL}/api/series/${id}`, {
     method: 'PUT',
     credentials: 'include',
     headers: {
